@@ -16,7 +16,7 @@ FD EMPLOYEE-FILE.
    05 ANNUAL-SALARY-STR PIC X(9).
    05 PERFORMANCE-RATING-STR PIC X.
 
-FD BONUS-REPORT.  *> Correct FD entry for BONUS-REPORT
+FD BONUS-REPORT.
 01 BONUS-RECORD PIC A(80).
 
 WORKING-STORAGE SECTION.
@@ -40,10 +40,15 @@ PROCEDURE DIVISION.
             NOT AT END
                 DISPLAY "Reading Employee ID: " EMPLOYEE-ID
                 DISPLAY "Employee Name: " EMPLOYEE-NAME
-                MOVE FUNCTION NUMVAL-C(ANNUAL-SALARY-STR) TO WS-ANNUAL-SALARY-NUM  *> Corrected usage
+
+                *> Convert the annual salary string to a numeric value
+                MOVE FUNCTION NUMVAL(ANNUAL-SALARY-STR) TO WS-ANNUAL-SALARY-NUM
                 DISPLAY "Annual Salary: " WS-ANNUAL-SALARY-NUM
-                MOVE FUNCTION NUMVAL-C(PERFORMANCE-RATING-STR) TO WS-PERFORMANCE-RATING-NUM  *> Corrected usage
+
+                *> Convert the performance rating string to a numeric value
+                MOVE FUNCTION NUMVAL(PERFORMANCE-RATING-STR) TO WS-PERFORMANCE-RATING-NUM
                 DISPLAY "Performance Rating: " WS-PERFORMANCE-RATING-NUM
+
                 EVALUATE WS-PERFORMANCE-RATING-NUM
                     WHEN 1 THRU 2
                         MOVE 0 TO BONUS-RATE
@@ -54,11 +59,13 @@ PROCEDURE DIVISION.
                     WHEN OTHER
                         MOVE 0 TO BONUS-RATE
                 END-EVALUATE
-                COMPUTE BONUS-AMOUNT = WS-ANNUAL-SALARY-NUM * BONUS-RATE / 100  *> Adjusted for decimal
+
+                COMPUTE BONUS-AMOUNT = WS-ANNUAL-SALARY-NUM * BONUS-RATE / 100
                 MOVE SPACES TO REPORT-LINE
+
                 STRING EMPLOYEE-NAME " - Rating: " WS-PERFORMANCE-RATING-NUM
                        " - Bonus: $" BONUS-AMOUNT DELIMITED BY SIZE INTO REPORT-LINE
-                WRITE BONUS-RECORD FROM REPORT-LINE  *> Correct reference
+                WRITE BONUS-RECORD FROM REPORT-LINE
         END-READ
     END-PERFORM
 
