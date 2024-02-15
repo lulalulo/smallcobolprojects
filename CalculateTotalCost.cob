@@ -32,10 +32,12 @@ PROCEDURE DIVISION.
             AT END
                 SET EOF TO TRUE
             NOT AT END
+                DISPLAY "Read Product: " PRODUCT-NAME " Price: " PRODUCT-PRICE
                 ADD PRODUCT-PRICE TO TOTAL-COST
         END-READ
     END-PERFORM
 
+    DISPLAY "Total Cost: " TOTAL-COST
     WRITE TOTAL-COST-RECORD FROM TOTAL-COST
 
     CLOSE PRODUCTS-FILE
