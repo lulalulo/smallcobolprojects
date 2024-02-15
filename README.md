@@ -2,7 +2,10 @@
 These are just cobol projects I did for fun and to learn a bit of how it works.
 
 # GNUCobol environment
-cobc (GnuCOBOL) 3.2.0
+
+``` sh
+# cobc -i
+cobc (GnuCOBOL)cobc - 3.2.0
 Copyright (C) 2023 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>
 This is free software; see the source for copying conditions.  There is NO
@@ -59,4 +62,6 @@ indexed file handler     : BDB
 mathematical library     : GMP
 XML library              : libxml2
 JSON library             : json-c
+
+```
 
