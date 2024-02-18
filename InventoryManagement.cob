@@ -38,7 +38,7 @@ PROCEDURE DIVISION.
                 UNSTRING TEMP-RECORD DELIMITED BY SPACES INTO ITEM-ID, ITEM-NAME, ITEM-QUANTITY
                 DISPLAY "Item: " ITEM-NAME ", Quantity: " ITEM-QUANTITY
                 DISPLAY "Enter sales (-) or new stock (+) for " ITEM-NAME ": "
-                ACCEPT SALES-UPDATE
+                ACCEPT SALES-UPDATE FROM CONSOLE
                 COMPUTE UPDATED-QUANTITY = ITEM-QUANTITY + SALES-UPDATE
                 IF UPDATED-QUANTITY < 0 THEN
                     MOVE 0 TO UPDATED-QUANTITY
