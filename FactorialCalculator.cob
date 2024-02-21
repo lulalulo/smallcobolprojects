@@ -24,12 +24,12 @@ MAIN-LOGIC.
 
 FUNCTION FACTORIAL.
     SECTION.
-    01 N PIC 9(5).
+    01 N PIC 9(5) VALUE 0.
     01 Result PIC 9(18) VALUE 1.
 
-    IF N = 0 THEN
-        RETURN Result
-    ELSE
-        COMPUTE Result = N * FUNCTION FACTORIAL(N - 1)
-        RETURN Result
-    END-IF.
+    PERFORM UNTIL N >= Num
+        COMPUTE Result = Result * (N + 1)
+        COMPUTE N = N + 1
+    END-PERFORM.
+
+    RETURN Result.
